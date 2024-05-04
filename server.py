@@ -2,7 +2,7 @@ import socket
 import threading
 
 
-port =9080
+port =5050
 #gerçek internette kullanımda bu ip cihazın public ip'sine eşitlenmeli
 server_ip = socket.gethostbyname(socket.gethostname())
 ADDR = (server_ip ,port)
@@ -12,6 +12,11 @@ server.bind(ADDR)
 #alınan ilk mesaj 64 bytlık bir header, bu değişken uzunluğu tutuyor:
 header = 64
 disconnect_message = "#quit"
+
+
+sended_messages = []
+recieved_messages = []
+
 def handle_contact(conn,addr):
     print(f"{addr} ip'li cihaz bağlandı")
     connected = True
@@ -25,12 +30,14 @@ def handle_contact(conn,addr):
                 connected = False
                 print(f"{addr} ip'li cihazla bağlantı sonlandırıldı")
             else:
+                recieved_messages.append(message)
                 print(f"[{addr} ip'li cihaz]: {message}")
     conn.close()
 
 def handle_send_message(conn,addr):
     while True:
         message = input("Mesajınız:")
+        sended_messages.append(message)
         message_encoded = message.encode("utf-8")
         message_length = len(message_encoded)
         send_length = str(message_length).encode("utf-8")

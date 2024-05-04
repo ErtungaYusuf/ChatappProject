@@ -1,8 +1,9 @@
-from flask import Flask, render_template
-from flask_socketio import SocketIO, send
 import tkinter as tk
 from tkinter import scrolledtext
 # from client  import send_message
+import server
+import client
+
 
 def send_message1(username):   #mesaj yollama
     message=text.get()
@@ -10,14 +11,7 @@ def send_message1(username):   #mesaj yollama
        #send_message(message)
        chat_history.insert(tk.END,username+":"+message)
     text.delete(0,tk.END)
-        
-    
-    
-def receive_message(username):
-    pass                            #mesaj alma  
-    
 
-    
 
 root=tk.Tk()
 frametop=tk.Frame(root,height=60,width=20,bg="lightblue")
