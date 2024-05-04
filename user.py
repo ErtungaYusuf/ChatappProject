@@ -8,7 +8,7 @@ port = 9080
 contacted_ip = input("Karşıdakinin ip adresi : ")
 
 #kendi ip'miz:
-user_ip = socket.gethostbyname(socket.gethostbyname())
+user_ip = socket.gethostbyname(socket.gethostname())
 
 #alınan ilk mesaj 64 bytlık bir header, bu değişken uzunluğu tutuyor:
 header = 64
