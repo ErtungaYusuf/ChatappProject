@@ -3,6 +3,7 @@ import threading
 
 
 port =9080
+#gerçek internette kullanımda bu ip cihazın public ip'sine eşitlenmeli
 server_ip = socket.gethostbyname(socket.gethostname())
 ADDR = (server_ip ,port)
 
@@ -25,7 +26,7 @@ def handle_contact(conn,addr):
                 print(f"{addr} ip'li cihazla bağlantı sonlandırıldı")
             else:
                 print(f"[{addr} ip'li cihaz]: {message}")
-
+                conn.send("Mesaj alındı".encode("utf-8"))
     conn.close()
 
 def start():
