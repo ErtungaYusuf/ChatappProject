@@ -26,8 +26,18 @@ def handle_contact(conn,addr):
                 print(f"{addr} ip'li cihazla bağlantı sonlandırıldı")
             else:
                 print(f"[{addr} ip'li cihaz]: {message}")
-                conn.send("Mesaj alındı".encode("utf-8"))
     conn.close()
+
+def handle_send_message(conn,addr):
+    while True:
+        message = input("Mesajınız:")
+        message_encoded = message.encode("utf-8")
+        message_length = len(message_encoded)
+        send_length = str(message_length).encode("utf-8")
+        send_length += b' ' * (header - len(send_length))
+        conn.send(send_length)
+        conn.send(message_encoded)
+
 
 def start():
     print(f"{server_ip} ip'li cihaz gelen bağlantıları dinliyor...")
@@ -35,7 +45,9 @@ def start():
     while True:
         conn,addr = server.accept()
         thread = threading.Thread(target=handle_contact, args=(conn,addr))
+        thread2 = threading.Thread(target=handle_send_message, args = (conn,addr))
         thread.start()
+        thread2.start()
 
 
 start()
