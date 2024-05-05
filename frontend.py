@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import scrolledtext
-# from client  import send_message
+from client  import send
+from client import receive
 import server
 import client
 
@@ -8,9 +9,15 @@ import client
 def send_message1(username):   #mesaj yollama
     message=text.get()
     if message:
-       #send_message(message)
+       send(message)
        chat_history.insert(tk.END,username+":"+message)
     text.delete(0,tk.END)
+
+def receive_message():
+    chat_history.insert(tk.END,receive())
+
+
+
 
 
 root=tk.Tk()

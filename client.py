@@ -18,9 +18,8 @@ recieved_messages = []
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
 fernet = Fernet(key)
 
-def send():
+def send(message):
     while True:
-        message = input("[+]:")
         senden_messages.append(message)
         message_encoded = message.encode("utf-8")
         encMessage = fernet.encrypt(message_encoded)
@@ -39,6 +38,7 @@ def receive():
             decMessage = fernet.decrypt(message).decode()
             recieved_messages.append(decMessage)
             print(f"Server'dan mesaj: {decMessage}")
+            return decMessage
 
 
 
