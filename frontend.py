@@ -4,7 +4,7 @@ from client  import send
 from client import receive
 import server
 import client
-
+import server
 
 def send_message1(username):   #mesaj yollama
     message=text.get()
@@ -13,8 +13,7 @@ def send_message1(username):   #mesaj yollama
        chat_history.insert(tk.END,username+":"+message)
     text.delete(0,tk.END)
 
-def receive_message():
-    chat_history.insert(tk.END,receive())
+server.start()
 
 
 
