@@ -1,5 +1,6 @@
 import socket
 import threading
+from cryptography.fernet import Fernet
 
 header = 64
 port = 5050
@@ -13,16 +14,21 @@ client.connect(ADDR)
 senden_messages = []
 recieved_messages = []
 
+#şifreleme:
+key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
+fernet = Fernet(key)
+
 def send():
     while True:
-        message = input("Mesajınız:")
+        message = input("[+]:")
         senden_messages.append(message)
         message_encoded = message.encode("utf-8")
-        message_length = len(message_encoded)
+        encMessage = fernet.encrypt(message_encoded)
+        message_length = len(encMessage)
         send_length = str(message_length).encode("utf-8")
         send_length += b' ' * (header - len(send_length))
         client.send(send_length)
-        client.send(message_encoded)
+        client.send(encMessage)
 
 def receive():
     while True:
@@ -30,8 +36,10 @@ def receive():
         if message_length:
             message_length = int(message_length)
             message = client.recv(message_length).decode("utf-8")
-            print(f"Server'dan mesaj: {message}")
-            recieved_messages.append(message)
+            decMessage = fernet.decrypt(message).decode()
+            recieved_messages.append(decMessage)
+            print(f"Server'dan mesaj: {decMessage}")
+
 
 
 def start():
