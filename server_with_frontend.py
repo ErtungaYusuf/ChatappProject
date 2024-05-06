@@ -59,6 +59,7 @@ def handle_send_message(conn, addr):
 
     def create_gui():
         root = tk.Tk()
+        root.title("Chat Uygulaması")
         frametop = tk.Frame(root, height=60, width=20, bg="lightblue")
         frametop.pack(side="top")
 
@@ -103,6 +104,7 @@ def start():
         thread2.start()
 def server_main():
     root = tk.Tk()
+    root.title("Chat Uygulaması")
     start()
     root.title("Chat Uygulaması")
     root.mainloop()
