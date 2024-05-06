@@ -2,6 +2,7 @@ import socket
 import threading
 from cryptography.fernet import Fernet
 import tkinter as tk
+#from main import get_username
 
 port = 5050
 server_ip = socket.gethostbyname(socket.gethostname())
@@ -17,7 +18,7 @@ received_messages = []
 
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
 fernet = Fernet(key)
-username = "Erol Yeşilyurt"
+username = "erol"
 def handle_contact(conn, addr):
     print(f"{addr} ip'li cihaz bağlandı")
     connected = True
