@@ -34,7 +34,7 @@ frame = tk.Frame(root, height=60, width=20, bg="lightblue")
 frame.pack(fill="both", expand="true")
 frame2 = tk.Frame(root, height=60, width=20, bg="lightblue")
 frame2.pack(side="bottom",fill="both", expand="true")
-label = tk.Label(frame, text="Server mı ya da client mı olmak istersin", bg="lightblue")
+label = tk.Label(frame, text="Programı server veya client olarak çalıştırmayı seçebilirsiniz", bg="lightblue")
 label.pack()
 button1 = tk.Button(frame, text="Server", command=server)
 button1.pack(side="right", padx=30)
@@ -49,7 +49,7 @@ message_entry.pack(side="left", fill="x", padx=10, pady=10, expand=True)
 
 
 
-label2 = tk.Label(frame2, text="Serverın ip adresi:", bg="lightblue")
+label2 = tk.Label(frame2, text="Server IP Adresi:", bg="lightblue")
 label2.pack(side="left",padx=10)
 ip_entry = tk.Entry(frame2) # IP adresi için bir Entry alanı oluştur
 ip_entry.pack(side="left", fill="x", padx=10, pady=10, expand=True)
