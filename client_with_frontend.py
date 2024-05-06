@@ -38,7 +38,7 @@ class ChatClient:
     def connect_to_server(self):
         # Sunucuya bağlanma
         try:
-            self.client.connect(("192.168.202.23", port))  # İletişim için hedef IP
+            self.client.connect(("10.123.6.92", port))  # İletişim için hedef IP
         except Exception as e:
             print("Bağlantı hatası:", e)
 
@@ -46,6 +46,9 @@ class ChatClient:
         # Mesaj gönderme
         message = self.message_entry.get()
         if message:
+            self.message_box.config(state=tk.NORMAL)
+            self.message_box.insert(tk.END, f"Sended: {message}\n")
+            self.message_box.config(state=tk.DISABLED)
             message_encoded = message.encode("utf-8")
             enc_message = fernet.encrypt(message_encoded)
             message_length = len(enc_message)
