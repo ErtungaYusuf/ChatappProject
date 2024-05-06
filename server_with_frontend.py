@@ -18,7 +18,7 @@ disconnect_message = "#quit"
 
 sended_messages = []
 received_messages = []
-
+username = "default1"
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
 fernet = Fernet(key)
 def set_username(name):
@@ -104,7 +104,8 @@ def start():
 def server_main():
     root = tk.Tk()
     start()
+    root.title("Chat Uygulaması")
     root.mainloop()
 
-
+#server_main()
 

@@ -11,7 +11,7 @@ disconnect_message = "#quit"
 # Anahtar oluşturulması veya kullanılması
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
 fernet = Fernet(key)
-
+username = "default2"
 def set_username(name):
     global username
     username=name
@@ -94,7 +94,8 @@ class ChatClient:
 def client_main():
     root = tk.Tk()
     app = ChatClient(root)
+    root.title("Chat Uygulaması")
     root.mainloop()
 
-
+#client_main()
 

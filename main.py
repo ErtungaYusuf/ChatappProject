@@ -26,6 +26,7 @@ def save_ip():
 
 root = tk.Tk()
 root.geometry("400x180")
+root.title("Chat Uygulaması")
 frame1 = tk.Frame(root, height=60, width=20, bg="lightblue")
 frame1.pack(side="top",fill="both", expand="true")
 frame = tk.Frame(root, height=60, width=20, bg="lightblue")
