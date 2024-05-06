@@ -15,17 +15,20 @@ fernet = Fernet(key)
 class ChatClient:
     def __init__(self, master):
         self.root = master
-        self.root.title("Chat Client")
-        self.root.geometry("400x400")
+        self.frametop = tk.Frame(self.root, height=60, width=20, bg="lightblue")
+        self.frametop.pack(side="top")
 
-        self.message_box = scrolledtext.ScrolledText(self.root, width=40, height=15)
-        self.message_box.pack(pady=10)
+        self.framebottom = tk.Frame(self.root, height=400, width=400, bg="lightblue")
+        self.framebottom.pack(side="bottom", fill="x")
 
-        self.message_entry = tk.Entry(self.root, width=30)
-        self.message_entry.pack()
+        self.message_box = tk.Listbox(self.frametop,width=60,height=20)
+        self.message_box.pack(padx=10,pady=10,side="top")
 
-        self.send_button = tk.Button(self.root, text="Send", command=self.send_message)
-        self.send_button.pack()
+        self.message_entry = tk.Entry(self.framebottom)
+        self.message_entry.pack(side="left",fill="x",padx=10,pady=10,expand=True)
+
+        self.send_button = tk.Button(self.framebottom, text="Send", command=self.send_message)
+        self.send_button.pack(side="right", padx=10)
 
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.connect_to_server()
@@ -38,7 +41,7 @@ class ChatClient:
     def connect_to_server(self):
         # Sunucuya bağlanma
         try:
-            self.client.connect(("10.123.6.92", port))  # İletişim için hedef IP
+            self.client.connect(("10.125.6.217", port))  # İletişim için hedef IP
         except Exception as e:
             print("Bağlantı hatası:", e)
 

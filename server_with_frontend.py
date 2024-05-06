@@ -32,6 +32,7 @@ def handle_contact(conn, addr):
                 print(f"{addr} ip'li cihazla bağlantı sonlandırıldı")
             else:
                 received_messages.append(f"[{addr} ip'li cihaz]: {decMessage}")
+                
                 print(f"[{addr} ip'li cihaz]: {decMessage}")
 
     conn.close()
@@ -49,16 +50,25 @@ def handle_send_message(conn, addr):
             conn.send(send_length)
             conn.send(encMessage)
             message_entry.delete(0, tk.END)
+            chat_history.insert(tk.END,message)
+
+
 
     root = tk.Tk()
-    root.title("Message Sender")
-    root.geometry("300x100")
+    frametop = tk.Frame(root, height=60, width=20, bg="lightblue")
+    frametop.pack(side="top")
 
-    message_entry = tk.Entry(root, width=30)
-    message_entry.pack(pady=5)
+    framebottom = tk.Frame(root, height=400, width=400, bg="lightblue")
+    framebottom.pack(side="bottom", fill="x")
 
-    send_button = tk.Button(root, text="Send", command=send_message)
-    send_button.pack(pady=5)
+    chat_history = tk.Listbox(frametop, width=60, height=20)
+    chat_history.pack(padx=10, pady=10, side="top")
+
+    message_entry = tk.Entry(framebottom)
+    message_entry.pack(side="left", fill="x", padx=10, pady=10, expand=True)
+
+    send_button = tk.Button(framebottom, text="Send", command=send_message)
+    send_button.pack(side="right", padx=10)
 
     root.bind("<Return>", send_message)
 
