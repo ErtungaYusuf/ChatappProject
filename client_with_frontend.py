@@ -23,6 +23,7 @@ def set_ip(ip):
 class ChatClient:
     def __init__(self, master):
         self.root = master
+        self.root.title("Chat Uygulaması")
         self.frametop = tk.Frame(self.root, height=60, width=20, bg="lightblue")
         self.frametop.pack(side="top")
 
@@ -93,6 +94,7 @@ class ChatClient:
 
 def client_main():
     root = tk.Tk()
+    root.title("Chat Uygulaması")
     app = ChatClient(root)
     root.mainloop()
 

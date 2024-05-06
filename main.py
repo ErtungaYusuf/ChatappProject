@@ -25,6 +25,7 @@ def save_ip():
     client_with_frontend.set_ip(ip)
 
 root = tk.Tk()
+root.title("Chat Uygulaması")
 root.geometry("400x180")
 frame1 = tk.Frame(root, height=60, width=20, bg="lightblue")
 frame1.pack(side="top",fill="both", expand="true")
