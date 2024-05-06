@@ -5,15 +5,18 @@ import threading
 
 def client():
     threading.Thread(target=client_with_frontend.client_main).start()
+    client_with_frontend.get_username(name)
 
 def server():
     threading.Thread(target=server_with_frontend.server_main).start()
-
+    server_with_frontend.get_username(name)
 def save_username():
+    global name
     name=message_entry.get()
+
     message_entry.delete(0,tk.END)
-def get_username():
-    return name
+
+
 
 
 root = tk.Tk()

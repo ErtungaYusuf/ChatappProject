@@ -18,7 +18,9 @@ received_messages = []
 
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
 fernet = Fernet(key)
-username = "erol"
+def get_username(name):
+    global username
+    username=name
 def handle_contact(conn, addr):
     print(f"{addr} ip'li cihaz bağlandı")
     connected = True

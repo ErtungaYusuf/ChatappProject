@@ -3,16 +3,21 @@ import threading
 import tkinter as tk
 from tkinter import scrolledtext
 from cryptography.fernet import Fernet
-#from main import get_username
 header = 64
 port = 5050
 disconnect_message = "#quit"
-server_ip="10.125.15.54"
+server_ip="192.168.1.157"
 
 # Anahtar oluşturulması veya kullanılması
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
 fernet = Fernet(key)
-username = "yusuf"
+
+def get_username(name):
+    global username
+    username=name
+
+
+
 class ChatClient:
     def __init__(self, master):
         self.root = master
