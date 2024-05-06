@@ -95,8 +95,10 @@ def start():
         thread2 = threading.Thread(target=handle_send_message, args=(conn, addr))
         thread.start()
         thread2.start()
+def server_main():
+    root = tk.Tk()
+    start()
+    root.mainloop()
 
-root = tk.Tk()
-start()
-root.mainloop()
+server_main()
 

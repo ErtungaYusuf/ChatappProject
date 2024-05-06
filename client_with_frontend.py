@@ -7,6 +7,7 @@ from cryptography.fernet import Fernet
 header = 64
 port = 5050
 disconnect_message = "#quit"
+server_ip="178.240.201.228"
 
 # Anahtar oluşturulması veya kullanılması
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
@@ -41,7 +42,7 @@ class ChatClient:
     def connect_to_server(self):
         # Sunucuya bağlanma
         try:
-            self.client.connect(("10.123.6.92", port))  # İletişim için hedef IP
+            self.client.connect((server_ip, port))  # İletişim için hedef IP
         except Exception as e:
             print("Bağlantı hatası:", e)
 
@@ -83,8 +84,11 @@ class ChatClient:
         self.message_box.config(state=tk.NORMAL)
         self.root.after(100, self.update_messages)
 
-if __name__ == "__main__":
+def client_main():
     root = tk.Tk()
     app = ChatClient(root)
     root.mainloop()
+if __name__ == "__main__":
+    client_main()
+
 
