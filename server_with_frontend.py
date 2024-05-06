@@ -8,6 +8,9 @@ port = 5050
 server_ip = socket.gethostbyname(socket.gethostname())
 ADDR = (server_ip, port)
 
+def get_server_ip():
+    return server_ip
+
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
 header = 64
