@@ -12,7 +12,7 @@ server_ip="192.168.1.157"
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
 fernet = Fernet(key)
 
-def get_username(name):
+def set_username(name):
     global username
     username=name
 
