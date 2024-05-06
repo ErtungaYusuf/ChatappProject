@@ -17,7 +17,7 @@ received_messages = []
 
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
 fernet = Fernet(key)
-
+username = "Erol Yeşilyurt"
 def handle_contact(conn, addr):
     print(f"{addr} ip'li cihaz bağlandı")
     connected = True
@@ -31,7 +31,7 @@ def handle_contact(conn, addr):
                 connected = False
                 print(f"{addr} ip'li cihazla bağlantı sonlandırıldı")
             else:
-                received_messages.append(f"[{addr} ip'li cihaz]: {decMessage}")
+                received_messages.append(decMessage)
                 print(f"[{addr} ip'li cihaz]: {decMessage}")
     conn.close()
 
@@ -39,6 +39,7 @@ def handle_send_message(conn, addr):
     def send_message(event=None):
         message = message_entry.get()
         if message:
+            message = username + ": " + message
             sended_messages.append(message)
             message_encoded = message.encode("utf-8")
             encMessage = fernet.encrypt(message_encoded)
@@ -74,7 +75,7 @@ def handle_send_message(conn, addr):
         while True:
             if received_messages:
                 message = received_messages.pop(0)
-                text_widget.insert(tk.END, f"{message}\n")
+                text_widget.insert(tk.END, message)
                 text_widget.see(tk.END)  # Scroll to the end
                 text_widget.update_idletasks()  # Güncellemeleri yap
             root.update()  # Ana pencereyi güncelle

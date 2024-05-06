@@ -11,7 +11,7 @@ disconnect_message = "#quit"
 # Anahtar oluşturulması veya kullanılması
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
 fernet = Fernet(key)
-
+username = "Ertunga Yusuf Ocak"
 class ChatClient:
     def __init__(self, master):
         self.root = master
@@ -41,7 +41,7 @@ class ChatClient:
     def connect_to_server(self):
         # Sunucuya bağlanma
         try:
-            self.client.connect(("10.125.6.217", port))  # İletişim için hedef IP
+            self.client.connect(("10.123.6.92", port))  # İletişim için hedef IP
         except Exception as e:
             print("Bağlantı hatası:", e)
 
@@ -49,8 +49,9 @@ class ChatClient:
         # Mesaj gönderme
         message = self.message_entry.get()
         if message:
+            message = username + ": " + message
             self.message_box.config(state=tk.NORMAL)
-            self.message_box.insert(tk.END, f"Sended: {message}\n")
+            self.message_box.insert(tk.END,message)
             self.message_box.config(state=tk.DISABLED)
             message_encoded = message.encode("utf-8")
             enc_message = fernet.encrypt(message_encoded)
@@ -71,7 +72,7 @@ class ChatClient:
                     message = self.client.recv(message_length).decode("utf-8")
                     dec_message = fernet.decrypt(message.encode()).decode()
                     self.message_box.config(state=tk.NORMAL)
-                    self.message_box.insert(tk.END, f"Received: {dec_message}\n")
+                    self.message_box.insert(tk.END, dec_message)
                     self.message_box.config(state=tk.DISABLED)
             except Exception as e:
                 print("Alma hatası:", e)
