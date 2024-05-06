@@ -32,9 +32,7 @@ def handle_contact(conn, addr):
                 print(f"{addr} ip'li cihazla bağlantı sonlandırıldı")
             else:
                 received_messages.append(f"[{addr} ip'li cihaz]: {decMessage}")
-                
                 print(f"[{addr} ip'li cihaz]: {decMessage}")
-
     conn.close()
 
 def handle_send_message(conn, addr):
@@ -52,49 +50,50 @@ def handle_send_message(conn, addr):
             message_entry.delete(0, tk.END)
             chat_history.insert(tk.END,message)
 
+    def create_gui():
+        root = tk.Tk()
+        frametop = tk.Frame(root, height=60, width=20, bg="lightblue")
+        frametop.pack(side="top")
 
+        framebottom = tk.Frame(root, height=400, width=400, bg="lightblue")
+        framebottom.pack(side="bottom", fill="x")
 
-    root = tk.Tk()
-    frametop = tk.Frame(root, height=60, width=20, bg="lightblue")
-    frametop.pack(side="top")
+        chat_history = tk.Listbox(frametop, width=60, height=20)
+        chat_history.pack(padx=10, pady=10, side="top")
 
-    framebottom = tk.Frame(root, height=400, width=400, bg="lightblue")
-    framebottom.pack(side="bottom", fill="x")
+        message_entry = tk.Entry(framebottom)
+        message_entry.pack(side="left", fill="x", padx=10, pady=10, expand=True)
 
-    chat_history = tk.Listbox(frametop, width=60, height=20)
-    chat_history.pack(padx=10, pady=10, side="top")
+        send_button = tk.Button(framebottom, text="Send", command=send_message)
+        send_button.pack(side="right", padx=10)
 
-    message_entry = tk.Entry(framebottom)
-    message_entry.pack(side="left", fill="x", padx=10, pady=10, expand=True)
+        root.bind("<Return>", send_message)
+        return root, chat_history, message_entry
 
-    send_button = tk.Button(framebottom, text="Send", command=send_message)
-    send_button.pack(side="right", padx=10)
+    def update_messages(text_widget):
+        while True:
+            if received_messages:
+                message = received_messages.pop(0)
+                text_widget.insert(tk.END, f"{message}\n")
+                text_widget.see(tk.END)  # Scroll to the end
+                text_widget.update_idletasks()  # Güncellemeleri yap
+            root.update()  # Ana pencereyi güncelle
 
-    root.bind("<Return>", send_message)
+    root, chat_history, message_entry = create_gui()
+    update_thread = threading.Thread(target=update_messages, args=(chat_history,))
+    update_thread.start()
 
     root.mainloop()
-
-def update_messages(text_widget):
-    while True:
-        if received_messages:
-            message = received_messages.pop(0)
-            text_widget.insert(tk.END, f"{message}\n")
-            text_widget.see(tk.END)  # Scroll to the end
-        root.update()
 
 def start():
     print(f"{server_ip} ip'li cihaz gelen bağlantıları dinliyor...")
     server.listen()
     while True:
         conn, addr = server.accept()
-        text_widget = tk.Text(root)
-        text_widget.pack()
         thread = threading.Thread(target=handle_contact, args=(conn, addr))
         thread2 = threading.Thread(target=handle_send_message, args=(conn, addr))
         thread.start()
         thread2.start()
-        update_thread = threading.Thread(target=update_messages, args=(text_widget,))
-        update_thread.start()
 
 root = tk.Tk()
 start()
