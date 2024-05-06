@@ -7,7 +7,7 @@ from cryptography.fernet import Fernet
 header = 64
 port = 5050
 disconnect_message = "#quit"
-server_ip="178.240.201.228"
+server_ip="10.125.15.54"
 
 # Anahtar oluşturulması veya kullanılması
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
@@ -88,7 +88,6 @@ def client_main():
     root = tk.Tk()
     app = ChatClient(root)
     root.mainloop()
-if __name__ == "__main__":
-    client_main()
+
 
 

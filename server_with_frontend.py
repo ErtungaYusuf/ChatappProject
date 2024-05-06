@@ -100,5 +100,5 @@ def server_main():
     start()
     root.mainloop()
 
-server_main()
+
 
