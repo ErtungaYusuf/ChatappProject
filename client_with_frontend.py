@@ -6,7 +6,8 @@ from cryptography.fernet import Fernet
 header = 64
 port = 5050
 disconnect_message = "#quit"
-#server_ip="192.168.1.157"
+#===============================
+#server_ip="192.168.55.23"
 
 # Anahtar oluşturulması veya kullanılması
 key = b'7a1vOxwC8XviL6IFcsCEo0xrQM_7_6A_kBz2e3qLmII='
